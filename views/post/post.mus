@@ -1,6 +1,6 @@
 {{>partials/header}}
 
-<h1>Homepage </h1>
+<h1>Individual Post Page </h1>
 
 <h2>{{pageTitle}}</h2>
 
