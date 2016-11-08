@@ -11,6 +11,19 @@ var router = exp.Router();
 
 
 
+router.get("/category", function(req, res){
+
+
+	//Set the page title
+	var pageTitleData = "404 not found!";
+
+	res.render("../views/404/404.mus", {
+		pageTitle: pageTitleData
+	});
+
+});
+
+
 router.get("/category/:categoryName", function(req, res){
 
 
@@ -22,5 +35,8 @@ router.get("/category/:categoryName", function(req, res){
 	});
 
 });
+
+
+
 
 module.exports = router;
