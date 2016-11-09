@@ -1,0 +1,31 @@
+{{>partials/header}}
+
+<h1>All Posts </h1>
+
+<div class="postListConainer" style="padding:15px;">
+	
+	{{#posts}}
+		<div>
+			<h3>{{title}}</h3>
+			<p> {{{post.content}}} </p>
+			<p> Created at: {{creationDate.time}} - {{creationDate.day}}.{{creationDate.month}}.{{creationDate.year}}</p>
+			
+			<a href="/{{path}}" class="btn btn-success" style="float:right">Go to post!</a>
+
+			<form action="/{{path}}?_method=DELETE" method="POST">
+				<input type="hidden" name="id" value="{{_id}}">
+				<button class="btn btn-danger" style="float:right; display:inline;">Delete!</button>
+
+			</form>
+			
+			
+		</div>
+		<br/>
+		<hr/>
+	{{/posts}}
+
+<div>
+
+
+
+{{>partials/footer}}

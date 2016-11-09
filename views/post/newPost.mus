@@ -3,8 +3,6 @@
 
 	Title: <input type="text" name="postTitle">
 	Content: <input type="text" name="postContent">
-	path: <input type="text" name="postPath">
-	date: <input type="hidden" name="creationDate" value="search" />
 	<input type= "submit">
 	
 </form>

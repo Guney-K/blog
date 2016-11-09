@@ -6,5 +6,9 @@
 
 <h3>{{post.title}} </h3>
 
-<p>{{post.content}} created at:{{post.creationDate}}</p>
+
+
+
+<p>Content:{{{post.content}}} </p>
+<p>Created at: {{post.creationDate.time}} - {{post.creationDate.day}}.{{post.creationDate.month}}.{{post.creationDate.year}}</p>
 {{>partials/footer}}

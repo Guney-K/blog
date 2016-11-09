@@ -1,9 +1,11 @@
 var exp = require('express');
 var mustache = require('mustache-express');
 var mongo = require('mongoose');
+var methodOverride = require('method-override');
 var app = exp();
 var bParser = require('body-parser');
 app.use(bParser.urlencoded({extended:true}));
+app.use(methodOverride("_method"));
 
 var homeRoute = require("./routes/home/home.js");
 var postRoute = require("./routes/post/post.js");
