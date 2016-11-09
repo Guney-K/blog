@@ -1,8 +1,17 @@
 {{>partials/header}}
+<script src="//cdn.ckeditor.com/4.5.11/standard/ckeditor.js"></script>
 <form action="/posts" method="POST">
 
 	Title: <input type="text" name="postTitle">
-	Content: <input type="text" name="postContent">
+	Content: <input type="text" name="postContents">
+	<textarea name="postContent" id="editor" rows="10" cols="80">
+                This is my textarea to be replaced with CKEditor.
+            </textarea>
+            <script>
+                // Replace the <textarea id="editor"> with a CKEditor
+                // instance, using default configuration.
+                CKEDITOR.replace( 'editor' );
+            </script>
 	<input type= "submit">
 	
 </form>
