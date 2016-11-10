@@ -4,11 +4,14 @@
 
 <h2>{{pageTitle}}</h2>
 
-<h3>{{post.title}} </h3>
+
+<h3>{{post.title}} - Category: {{post.category}}</h3>
 
 
 
 
 <p>Content:{{{post.content}}} </p>
+
+<div class="btn btn-success">{{post.prize}}</div>
 <p>Created at: {{post.creationDate.time}} - {{post.creationDate.day}}.{{post.creationDate.month}}.{{post.creationDate.year}}</p>
 {{>partials/footer}}

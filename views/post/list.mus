@@ -6,12 +6,11 @@
 	
 	{{#posts}}
 		<div>
-			<h3>{{title}}</h3>
-			<p> {{{post.content}}} </p>
+			<h3>{{title}} <span style="float:right;">{{prize}}</h3>
+			<h5>Category:{{category}}</h5>
+			<p> {{{content}}} </span></p>
 			<p> Created at: {{creationDate.time}} - {{creationDate.day}}.{{creationDate.month}}.{{creationDate.year}}</p>
-			
 			<a href="/{{path}}" class="btn btn-success" style="float:right">Go to post!</a>
-
 			<form action="/{{path}}?_method=DELETE" method="POST">
 				<input type="hidden" name="id" value="{{_id}}">
 				<button class="btn btn-danger" style="float:right; display:inline;">Delete!</button>

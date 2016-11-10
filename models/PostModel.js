@@ -6,6 +6,8 @@ var PostSchema = new mongo.Schema(
 	{
 		title: String,
 		content: String,
+		prize: String,
+		category:String,
 		path: String,
 		creationDate:{
 			day: String,

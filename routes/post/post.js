@@ -51,13 +51,16 @@ router.post("/posts", function(req, res){
 
 	var postTitle = req.body.postTitle;
 	var postContent = req.body.postContent;
+	var postPrize = req.body.postPrize;
+	var postCategory = req.body.postCategory;
 	var postPath = constructPostPath(postTitle);
 	var postDate = constructDate();
+
 	console.log(postPath);
 	
 	//var postCreationDate = req.body.creationDate;
 
-	var newPost = {title:postTitle, content:postContent, path:postPath, creationDate:postDate};
+	var newPost = {title:postTitle, content:postContent, prize:postPrize, category:postCategory, path:postPath, creationDate:postDate};
 	PostModel.create(newPost, function(err, newlyPost){
 		if (err) {
 			console.log(err);
@@ -132,7 +135,7 @@ router.get("/:postTitleURI", function(req, res){
 
 router.delete("/:postTitleURI", function(req, res){
 
-console.log(req.body.id);
+	console.log(req.body.id);
 	PostModel.findByIdAndRemove(req.body.id, function(err){
 		if (err) {
 			console.log(err)

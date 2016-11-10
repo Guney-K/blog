@@ -3,15 +3,24 @@
 <form action="/posts" method="POST">
 
 	Title: <input type="text" name="postTitle">
-	Content: <input type="text" name="postContents">
+	Content: <input type="text" name="postPrize">
+	Category: 
+	<select name="postCategory">
+  		<option value="Electronics">Electronics</option>
+  		<option value="Fashion">Fashion</option>
+  		<option value="Travel">Travel</option>
+		<option value="Cosmetics">Audi</option>
+	</select>>
+
 	<textarea name="postContent" id="editor" rows="10" cols="80">
-                This is my textarea to be replaced with CKEditor.
-            </textarea>
-            <script>
-                // Replace the <textarea id="editor"> with a CKEditor
-                // instance, using default configuration.
-                CKEDITOR.replace( 'editor' );
-            </script>
+		This is my textarea to be replaced with CKEditor.
+	</textarea>
+	<script>
+	    // Replace the <textarea id="editor"> with a CKEditor
+	    // instance, using default configuration.
+	    CKEDITOR.replace( 'editor' );
+	</script>
+	<br/>
 	<input type= "submit">
 	
 </form>
