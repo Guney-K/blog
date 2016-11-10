@@ -7,6 +7,9 @@ app.use(bParser.urlencoded({extended:true}));
 app.engine("mus", mustache());
 app.set("view engine", "mus");
 
+var PostModel = require('../../models/PostModel.js');
+var CategoryModel = require('../../models/CategoryModel.js');
+
 var router = exp.Router();
 
 
@@ -23,18 +26,64 @@ router.get("/category", function(req, res){
 
 });
 
+router.get("/category/management", function(req, res){
 
-router.get("/category/:categoryName", function(req, res){
+	var pageTitleData = "Management is here";
+	
+
+		CategoryModel.find({},function(err, foundCategories){
+			if (err) {
+				console.log(err);
+			} else{
+				res.render("../views/category/management", {pageTitle:pageTitleData, categories:foundCategories});
+			};
+		});
 
 
-	//Set the page title
-	var pageTitleData = "List of posts in following category:" + req.params.categoryName;
-
-	res.render("../views/category/categoryPostList.mus", {
-		pageTitle: pageTitleData
-	});
 
 });
+
+router.post("/category/management", function(req, res){
+
+	var category = {
+		name: req.body.categoryName,
+		value: req.body.categoryValue,
+		id: req.body.categoryId
+	};
+	CategoryModel.create(category, function(err, newlyCategory){
+		if (err) {
+			console.log(err);
+		} else{
+			res.redirect("/category/management");	
+		};
+		
+	});
+});
+
+router.get("/category/:categoryName", function(req, res){
+	var pageTitleData = "List of posts in following category:" + req.params.categoryName;
+	postCategory = req.params.categoryName;
+	PostModel.find({'category':postCategory}, function(err, foundPosts){
+
+		if (err) {
+			console.log(err);
+		} else{
+			
+			console.log();
+			if (typeof foundPosts !== 'undefined' && foundPosts.length > 0) {
+				
+				res.render("../views/post/list.mus",{pageTitle:pageTitleData, posts:foundPosts});
+			} else{
+				res.render("../views/404/404.mus",{pageTitle:pageTitleData});
+			};
+		};
+	});
+
+
+
+});
+
+
 
 
 

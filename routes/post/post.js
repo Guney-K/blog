@@ -7,6 +7,7 @@ app.use(bParser.urlencoded({extended:true}));
 app.use(bParser.json());
 
 var PostModel = require('../../models/PostModel.js');
+var CategoryModel = require('../../models/CategoryModel.js');
 
 
 
@@ -47,12 +48,16 @@ function constructPostPath(path){
 	return path;
 }
 
+function getCategoryList(){
+
+}
+
 router.post("/posts", function(req, res){
 
 	var postTitle = req.body.postTitle;
 	var postContent = req.body.postContent;
 	var postPrize = req.body.postPrize;
-	var postCategory = req.body.postCategory;
+	var postCategory = req.body.postCategory.toLowerCase();
 	var postPath = constructPostPath(postTitle);
 	var postDate = constructDate();
 
@@ -90,7 +95,18 @@ router.get("/posts", function(req, res){
 
 router.get("/posts/new", function(req, res){
 
- res.render("../views/post/newPost.mus");
+
+	CategoryModel.find({},function(err, foundCategories){
+		if (err) {
+			console.log(err);
+		} else{
+			console.log(foundCategories);
+			res.render("../views/post/newPost.mus", {categories:foundCategories});
+		};
+	});
+	
+
+	
 
 });
 

@@ -14,4 +14,7 @@
 
 <div class="btn btn-success">{{post.prize}}</div>
 <p>Created at: {{post.creationDate.time}} - {{post.creationDate.day}}.{{post.creationDate.month}}.{{post.creationDate.year}}</p>
+
+
+<a href="/posts" class="btn btn-danger">Back to Posts </a>
 {{>partials/footer}}

@@ -22,24 +22,5 @@ var PostSchema = new mongo.Schema(
 		timestamps: true
 	}
 );
-/*
-var PostSchema = new mongo.Schema({
-	title: String,
-	content: String,
-	date: {Date: Date.now},
-	timestamps: { createdAt: 'created_at' },
 
-	author: {
-		name: String
-	},
-
-	comments:[
-		{
-			type: mongo.Schema.Types.ObjectId,
-			ref: "CommentModel"
-		}
-	]
-
-});
-*/
 module.exports = mongo.model("PostModel", PostSchema);
