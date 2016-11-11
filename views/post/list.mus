@@ -5,22 +5,27 @@
 <div class="postListConainer" style="padding:15px;">
 	
 	{{#posts}}
-		<div>
-			<h3>{{title}} <span style="float:right;">{{prize}}</h3>
-			<h5>Category:{{category}}</h5>
-			<p> {{{content}}} </span></p>
-			<p> Created at: {{creationDate.time}} - {{creationDate.day}}.{{creationDate.month}}.{{creationDate.year}}</p>
-			<a href="/{{path}}" class="btn btn-success" style="float:right">Go to post!</a>
-			<form action="/{{path}}?_method=DELETE" method="POST">
-				<input type="hidden" name="id" value="{{_id}}">
-				<button class="btn btn-danger" style="float:right; display:inline;">Delete!</button>
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<h3>{{title}} <span style="float:right;">{{prize}}</h3>
+				<h5>Category:{{category}}</h5>
+			</div>
+			<div class="panel-body">
+				<p> {{{content}}} </span></p>
+			</div>
+			<div class="panel-footer">
+				<p style="display: inline-block; margin: 8px"> Created at: {{creationDate.time}} - {{creationDate.day}}.{{creationDate.month}}.{{creationDate.year}}</p>
+				<form action="/{{path}}?_method=DELETE" method="POST" style="float:right; display:inline;">
+					<input type="hidden" name="id" value="{{_id}}">
+					<button class="btn btn-danger" >Delete!</button>
 
-			</form>
-			
-			
+				</form>
+				<a href="/{{path}}" class="btn btn-success" style="float:right;">Go to post!</a>
+				
+			</div>
 		</div>
 		<br/>
-		<hr/>
+
 	{{/posts}}
 
 <div>

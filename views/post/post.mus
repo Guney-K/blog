@@ -5,16 +5,26 @@
 <h2>{{pageTitle}}</h2>
 
 
-<h3>{{post.title}} - Category: {{post.category}}</h3>
+<div class="panel panel-info">
+	<div class="panel-heading">
+		<h3>{{post.title}} - Category: {{post.category}}</h3>
+	</div>
+
+	<div class="panel-body">
+		<p>Content:{{{post.content}}} </p>
+	</div>
+
+	<div class="panel-footer">
+		<p style="display: inline-block; margin: 8px">Created at: {{post.creationDate.time}} - {{post.creationDate.day}}.{{post.creationDate.month}}.{{post.creationDate.year}}</p>
+		<a href="/posts" class="btn btn-danger">Back to Posts </a>
+		<div class="btn btn-success" style="float:right">{{post.prize}}</div>
+		
+	</div>
+
+		
+</div>
 
 
 
 
-<p>Content:{{{post.content}}} </p>
-
-<div class="btn btn-success">{{post.prize}}</div>
-<p>Created at: {{post.creationDate.time}} - {{post.creationDate.day}}.{{post.creationDate.month}}.{{post.creationDate.year}}</p>
-
-
-<a href="/posts" class="btn btn-danger">Back to Posts </a>
 {{>partials/footer}}

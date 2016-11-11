@@ -5,12 +5,7 @@
 	Title: <input type="text" name="postTitle">
 	Prize: <input type="text" name="postPrize">
 	Category: 
-	<select name = "postCategory">
-		{{#categories}}
-			<option value="{{value}}" id="{{id}}">{{name}}</option>
-		{{/categories}}
-	</select>
-
+	
 	<textarea name="postContent" id="editor" rows="10" cols="80">
 		This is my textarea to be replaced with CKEditor.
 	</textarea>
@@ -20,7 +15,30 @@
 	    CKEDITOR.replace( 'editor' );
 	</script>
 	<br/>
+
+
+
+	<select name = "postCategory">
+		{{#categories}}
+			<option value="{{value}}" id="{{id}}">{{name}}</option>
+		{{/categories}}
+	</select>
+
+	<br/>
+
+	<div class="input-group">
+	{{#categories}}
+		<div>
+	    	<span class="input-group-addon">
+	    		<input type="checkbox" aria-label="..." id="{{id}}" value="{{value}}">
+	    	</span>
+	    	<label type="text" class="form-control"  aria-label="..." style="float:none;">{{name}}</label>
+    	</div>
+    {{/categories}}
+    </div><!-- /input-group -->
+
+
 	<input type= "submit">
 	
 </form>
-{{>partials/footer}}
+{{>partials/footer}}ss
