@@ -15,10 +15,21 @@
 
 <h3>List of categories</h3>
 
-<select name = "categoryList">
+
+
+	<div class="input-group">
 	{{#categories}}
-		<option value="{{value}}" id="{{id}}">{{name}}</option>
-	{{/categories}}
+		<div>
+	    	<span class="input-group-addon">
+	    		<input type="checkbox" aria-label="..." name="selectedCategories" id="{{id}}" value="{{_id}}">
+	    	</span>
+	    	<label type="text" class="form-control"  aria-label="..." style="float:none;">{{name}}</label>
+	    	<label type="text" class="form-control"  aria-label="..." style="float:none;">{{total}}</label>
+    	</div>
+    {{/categories}}
+    </div><!-- /input-group -->
+
+
 
 
 {{>partials/footer}}

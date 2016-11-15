@@ -2,9 +2,10 @@ var mongo = require("mongoose");
 
 var CategorySchema = new mongo.Schema(
 	{
-		id: Number,
+		idd: Number,
 		value: String,
-		name: String
+		name: String,
+		total: {type:Number, default: 0}
 	}
 );
 

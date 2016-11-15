@@ -1,14 +1,19 @@
 {{>partials/header}}
 
 <h1>All Posts </h1>
-
+<a href="/posts/new"> New post</a>
 <div class="postListConainer" style="padding:15px;">
 	
 	{{#posts}}
 		<div class="panel panel-info">
 			<div class="panel-heading">
 				<h3>{{title}} <span style="float:right;">{{prize}}</h3>
-				<h5>Category:{{category}}</h5>
+				<h5>Categories:
+				{{#categories}}
+				{{name}}
+
+				{{/categories}}
+				</h5>
 			</div>
 			<div class="panel-body">
 				<p> {{{content}}} </span></p>
@@ -21,15 +26,18 @@
 
 				</form>
 				<a href="/{{path}}" class="btn btn-success" style="float:right;">Go to post!</a>
+
 				
 			</div>
 		</div>
 		<br/>
 
 	{{/posts}}
-
+	{{#pages}}
+		<a href="/page/{{.}}"> {{.}} </a>
+	{{/pages}}
 <div>
 
-
+{{>category/partials/categoryListSide}}
 
 {{>partials/footer}}

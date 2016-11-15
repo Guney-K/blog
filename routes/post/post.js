@@ -60,16 +60,38 @@ router.post("/posts", function(req, res){
 	var postCategory = req.body.postCategory.toLowerCase();
 	var postPath = constructPostPath(postTitle);
 	var postDate = constructDate();
+	var postCategories = [];
+	postCategories.push(req.body.selectedCategories);
 
-	console.log(postPath);
+	console.log("selectedID:" + postCategories);
 	
 	//var postCreationDate = req.body.creationDate;
 
-	var newPost = {title:postTitle, content:postContent, prize:postPrize, category:postCategory, path:postPath, creationDate:postDate};
+	var newPost = {
+		title: postTitle, 
+		content: postContent, 
+		prize: postPrize, 
+		category: postCategory, 
+		path: postPath, 
+		categories: postCategories,
+		creationDate: postDate
+	};
+
 	PostModel.create(newPost, function(err, newlyPost){
 		if (err) {
 			console.log(err);
 		}else{
+			postCategories.forEach(function(category){
+				
+				CategoryModel.update({_id: category}, {$inc: {total: 1}},function(err){
+					if (err) {
+						console.log(err);
+					} else{};
+				});
+
+			});
+			
+			//console.log(newlyPost);
 			res.redirect("/posts");
 		};
 
@@ -80,11 +102,45 @@ router.post("/posts", function(req, res){
 
 router.get("/posts", function(req, res){
 
-	PostModel.find({}, function(err, allPosts){
+/*
+
+	MyModel.find( { createdOn: { $lte: request.createdOnBefore } } ).limit( 10 ).sort( '-createdOn' )
+
+	var lastPostIds = [];
+
+	var pageSize = 2;
+	PostModel.find().sort({"_id":-1}).limit(2);
+
+	lastPostId = "none";
+
+
+
+	PostModel.find({"_id" : {$lte : ObjectId(lastPostId)}}).sort({"_id":-1}).limit(pageSize).populate.exec(function(err, foundPosts){
 		if (err) {
 
 		} else{
-			res.render("../views/post/list.mus", {posts:allPosts});
+			res.render
+
+		};
+
+	});
+*/
+	PostModel.find({}).populate("categories").exec(function(err, allPosts){
+		if (err) {
+			console.log(err);
+		} else{
+
+			CategoryModel.find({"total":{$gt:0}}, function(err, foundCategories){
+				if (err) {
+					console.log(err);
+				} else{
+					res.render("../views/post/list.mus", {categoryList:foundCategories, posts:allPosts});
+				};
+			});
+			//console.log(allPosts);
+			
+
+
 		};
 
 	});
@@ -92,11 +148,69 @@ router.get("/posts", function(req, res){
 	
 });
 
+router.get("/page/:pageNo", function(req, res){
+
+	var pageSize = 2;
+	var currentPageNo = req.params.pageNo;
+	var paging = 5;
+	var pagingCheck = 0;
+
+	var pageNoList = [];
+	var nextPageNo = currentPageNo +1 ;
+
+
+	console.log(currentPageNo);
+
+	PostModel.count(function(err, totalPosts) {
+		if (err) {
+			console.log(err);
+		} else{
+			pagingCheck = totalPosts/pageSize;
+
+			if (totalPosts > (pageSize*paging)) {
+				for (var i = -2; i < (paging-2) ; i++) {
+					pageNoList.push(parseInt(currentPageNo) + i);
+				};
+			} else{
+				for (var i = 0; i < Math.ceil(pagingCheck); i++) {
+					pageNoList.push(i+1);
+				};
+			};
+
+
+			if ((currentPageNo-1)*pageSize < totalPosts) {
+				PostModel.find({}).sort({"_id":-1}).skip((currentPageNo-1)*pageSize).limit(pageSize).populate("categories").exec(function(err, foundPosts){
+					if (err) {
+						console.log(err);
+					} else{
+						res.render("../views/post/list.mus", {posts:foundPosts, pages:pageNoList});
+					};
+
+				});
+			} else{
+
+				res.render("../views/404/404.mus", {});
+			};
+
+		};
+	});
+
+
+
+
+
+
+
+
+	
+	
+});
+
 
 router.get("/posts/new", function(req, res){
 
 
-	CategoryModel.find({},function(err, foundCategories){
+	CategoryModel.find({}, function(err, foundCategories){
 		if (err) {
 			console.log(err);
 		} else{
@@ -152,10 +266,22 @@ router.get("/:postTitleURI", function(req, res){
 router.delete("/:postTitleURI", function(req, res){
 
 	console.log(req.body.id);
-	PostModel.findByIdAndRemove(req.body.id, function(err){
+	PostModel.findByIdAndRemove(req.body.id, function(err, removed){
 		if (err) {
-			console.log(err)
+			
 		} else{
+			
+
+			removed.categories.forEach(function(category){
+				console.log("removed:" + category);
+				CategoryModel.update({_id: category}, {$inc:{total: -1}}, function(err){
+					if (err) {
+						console.log(err);
+					} else{};
+				});
+
+			});
+			 
 			res.redirect("/posts");
 		};
 	});

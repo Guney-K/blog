@@ -1,0 +1,10 @@
+<div name="categoryListContainer">
+	{{#categoryList}}
+		<div>
+	    	<a href="/category/{{value}}" class="form-control"  aria-label="..." style="float:none;">{{name}}</a>
+	    	<label class= "form-control" style="float:none;">{{total}}</label>
+	    	
+	   	</div>
+	{{/categoryList}}
+
+</div>

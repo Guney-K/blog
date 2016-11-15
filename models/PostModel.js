@@ -14,7 +14,13 @@ var PostSchema = new mongo.Schema(
 			month: String,
 			year: String,
 			time: String
-		}
+		},
+		categories: [
+			{
+				type: mongo.Schema.Types.ObjectId,
+				ref: "CategoryModel"
+			}
+		]
 		
 		//timestamps: { createdAt: 'created_at' }
 	},
@@ -24,3 +30,4 @@ var PostSchema = new mongo.Schema(
 );
 
 module.exports = mongo.model("PostModel", PostSchema);
+

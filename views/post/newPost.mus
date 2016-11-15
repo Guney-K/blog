@@ -30,7 +30,7 @@
 	{{#categories}}
 		<div>
 	    	<span class="input-group-addon">
-	    		<input type="checkbox" aria-label="..." id="{{id}}" value="{{value}}">
+	    		<input type="checkbox" aria-label="..." name="selectedCategories" id="{{id}}" value="{{_id}}">
 	    	</span>
 	    	<label type="text" class="form-control"  aria-label="..." style="float:none;">{{name}}</label>
     	</div>
@@ -41,4 +41,4 @@
 	<input type= "submit">
 	
 </form>
-{{>partials/footer}}ss
+{{>partials/footer}}
